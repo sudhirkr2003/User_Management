@@ -1,19 +1,21 @@
 package sales_savvy.dto;
 
+import sales_savvy.entity.Gender;
+
 public class UserControllerDto {
 	String username;
 	String password;
 	long mobile;
 	String email;
 	String dob;
-	String gender;
+	Gender gender;
 	String address;
 	String dpUrl;
 	public UserControllerDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UserControllerDto(String username, String password, long mobile, String email, String dob, String gender,
+	public UserControllerDto(String username, String password, long mobile, String email, String dob, Gender gender,
 			String address, String dpUrl) {
 		super();
 		this.username = username;
@@ -55,10 +57,10 @@ public class UserControllerDto {
 	public void setDob(String dob) {
 		this.dob = dob;
 	}
-	public String getGender() {
+	public Gender getGender() {
 		return gender;
 	}
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 	public String getAddress() {
@@ -78,6 +80,7 @@ public class UserControllerDto {
 		return "UserControllerDto [username=" + username + ", password=" + password + ", mobile=" + mobile + ", email="
 				+ email + ", dob=" + dob + ", gender=" + gender + ", address=" + address + ", dpUrl=" + dpUrl + "]";
 	}
+	
 	
 	
 }
