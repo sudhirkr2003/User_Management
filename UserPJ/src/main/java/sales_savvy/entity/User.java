@@ -37,7 +37,7 @@ public class User {
 	@Column(nullable = false, length=500)
 	private String address;
 	
-	@Column(nullable = false , unique = true, length = 500)
+	@Column(length = 500)
 	private String dpUrl;
 	
 	public User() {

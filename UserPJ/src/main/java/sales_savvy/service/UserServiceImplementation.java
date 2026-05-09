@@ -4,6 +4,7 @@ import sales_savvy.entity.User;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import sales_savvy.dto.UserRequestDto;
@@ -13,10 +14,12 @@ import sales_savvy.repository.UserRepository;
 public class UserServiceImplementation implements UserService
 {
 	
+	private final PasswordEncoder passwordEncoder;
 	UserRepository userRepo;
-	public UserServiceImplementation(UserRepository userRepo) {
+	public UserServiceImplementation(UserRepository userRepo, PasswordEncoder passwordEncoder) {
 		super();
 		this.userRepo = userRepo;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	@Override
@@ -30,7 +33,7 @@ public class UserServiceImplementation implements UserService
 		}
 		User u = new User();
 		u.setUsername(user.getUsername());
-		u.setPassword(user.getPassword());
+		u.setPassword(passwordEncoder.encode(user.getPassword()));
 		u.setAddress(user.getAddress());
 		u.setDob(user.getDob());
 		u.setDpUrl(user.getDpUrl());
