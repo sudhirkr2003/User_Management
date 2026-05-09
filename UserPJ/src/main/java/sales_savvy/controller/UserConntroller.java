@@ -2,6 +2,7 @@ package sales_savvy.controller;
 
 import sales_savvy.entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import sales_savvy.dto.UserControllerDto;
+import sales_savvy.dto.UserRequestDto;
 import sales_savvy.service.UserService;
 
 @RestController
@@ -28,20 +29,52 @@ public class UserConntroller {
 
 
 	@PostMapping("/registration")
-	public String registration(@RequestBody UserControllerDto user) {
+	public String registration(@RequestBody UserRequestDto user) {
 		
 		return userService.addUser(user);
 	}
 	
 	@GetMapping("/search/{id}")
-	public User search(@PathVariable int id) {
-		return userService.search(id);
+	public UserRequestDto search(@PathVariable int id) {
+		User user = userService.search(id);
+		
+		UserRequestDto userDto = new UserRequestDto();
+		userDto.setUsername(user.getUsername());
+		userDto.setMobile(user.getMobile());
+		userDto.setEmail(user.getEmail());
+		userDto.setDob(user.getDob());
+		userDto.setGender(user.getGender());
+		userDto.setAddress(user.getAddress());
+		userDto.setDpUrl(user.getDpUrl());
+		userDto.setPassword("************");
+		return userDto;
+		
 	}
 	
 	
 	@GetMapping("viewAll")
-	public List<User> allUser() {
-		return userService.getAll();
+	public List<UserRequestDto> allUser() {
+		List<User> list = userService.getAll();
+
+		List<UserRequestDto> dtoList = new ArrayList<>();
+
+		for(User u : list) {
+
+			UserRequestDto dto = new UserRequestDto(
+					u.getUsername(),
+					"**************",
+					u.getMobile(),
+					u.getEmail(),
+					u.getDob(),
+					u.getGender(),
+					u.getAddress(),
+					u.getDpUrl()
+			);
+
+			dtoList.add(dto);
+		}
+
+		return dtoList;
 	}
 	
 	@PatchMapping("/update/{id}")

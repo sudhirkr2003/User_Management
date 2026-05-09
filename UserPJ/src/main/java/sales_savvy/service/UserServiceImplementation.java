@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import sales_savvy.dto.UserControllerDto;
+import sales_savvy.dto.UserRequestDto;
 import sales_savvy.repository.UserRepository;
 
 @Service
@@ -20,7 +20,14 @@ public class UserServiceImplementation implements UserService
 	}
 	
 	@Override
-	public String addUser(UserControllerDto user) {
+	public String addUser(UserRequestDto user) {
+		if(userRepo.findByUsername(user.getUsername()).orElse(null) != null) {
+			return "Username is already Exist, Plaese use rdiffrent username";
+		}
+		
+		if(userRepo.findByEmail(user.getEmail()).orElse(null) != null) {
+			return "Email is already in use, Plaese use rdiffrent Email";
+		}
 		User u = new User();
 		u.setUsername(user.getUsername());
 		u.setPassword(user.getPassword());
@@ -32,7 +39,7 @@ public class UserServiceImplementation implements UserService
 		u.setMobile(user.getMobile());
 		
 		userRepo.save(u);
-		return "User Registered";
+		return "User Registered Successfully.";
 		
 	}
 

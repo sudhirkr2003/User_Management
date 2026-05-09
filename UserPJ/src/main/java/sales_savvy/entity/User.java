@@ -1,5 +1,7 @@
 package sales_savvy.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -14,7 +16,7 @@ import jakarta.persistence.Table;
 public class User {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	@Column(nullable = false , unique = true, length = 50)
@@ -27,7 +29,7 @@ public class User {
 	@Column(nullable = false , unique = true, length = 100)
 	private String email;
 	@Column(nullable = false)
-	private String dob;
+	private LocalDate dob;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length=15)
@@ -43,7 +45,7 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int id, String username, String password, long mobile, String email, String dob, Gender gender,
+	public User(int id, String username, String password, long mobile, String email, LocalDate dob, Gender gender,
 			String address, String dpUrl) {
 		super();
 		this.id = id;
@@ -97,11 +99,11 @@ public class User {
 		this.email = email;
 	}
 
-	public String getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(String dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 

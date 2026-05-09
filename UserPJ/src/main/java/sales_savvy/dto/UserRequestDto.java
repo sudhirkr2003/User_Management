@@ -1,21 +1,23 @@
 package sales_savvy.dto;
 
+import java.time.LocalDate;
+
 import sales_savvy.entity.Gender;
 
-public class UserControllerDto {
+public class UserRequestDto {
 	String username;
 	String password;
 	long mobile;
 	String email;
-	String dob;
+	LocalDate dob;
 	Gender gender;
 	String address;
 	String dpUrl;
-	public UserControllerDto() {
+	public UserRequestDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UserControllerDto(String username, String password, long mobile, String email, String dob, Gender gender,
+	public UserRequestDto(String username, String password, long mobile, String email, LocalDate dob, Gender gender,
 			String address, String dpUrl) {
 		super();
 		this.username = username;
@@ -51,10 +53,10 @@ public class UserControllerDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
-	public void setDob(String dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 	public Gender getGender() {
@@ -77,9 +79,12 @@ public class UserControllerDto {
 	}
 	@Override
 	public String toString() {
-		return "UserControllerDto [username=" + username + ", password=" + password + ", mobile=" + mobile + ", email="
+		return "UserRequestDto [username=" + username + ", password=" + password + ", mobile=" + mobile + ", email="
 				+ email + ", dob=" + dob + ", gender=" + gender + ", address=" + address + ", dpUrl=" + dpUrl + "]";
 	}
+	
+	
+	
 	
 	
 	
